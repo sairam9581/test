@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        button {
+            padding: 8px 16px;
+            background-color: #0066cc;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        button:hover {
+            background-color: #0055aa;
+        }
+        pre {
+            background-color: #f5f5f5;
+            padding: 10px;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>API Test</h1>
+        
+        <div class="form-group">
+            <label for="apiKey">API Key:</label>
+            <input type="text" id="apiKey" value="your-api-key-here">
+        </div>
+        
+        <h2>Test POST Request</h2>
+        <div class="form-group">
+            <label for="firstName">First Name:</label>
+            <input type="text" id="firstName" value="John">
+        </div>
+        <div class="form-group">
+            <label for="cityName">City Name:</label>
+            <input type="text" id="cityName" value="New York">
+        </div>
+        <div class="form-group">
+            <label for="yearOfJoining">Year of Joining:</label>
+            <input type="number" id="yearOfJoining" value="2023">
+        </div>
+        
+        <button id="postButton">Send POST Request</button>
+        
+        <h2>Test GET Request</h2>
+        <button id="getButton">Send GET Request</button>
+        
+        <h2>Results</h2>
+        <pre id="results">Results will appear here...</pre>
+    </div>
+    
+    <script>
+        document.getElementById('postButton').addEventListener('click', async () => {
+            const apiKey = document.getElementById('apiKey').value;
+            const firstName = document.getElementById('firstName').value;
+            const cityName = document.getElementById('cityName').value;
+            const yearOfJoining = parseInt(document.getElementById('yearOfJoining').value);
+            
+            const resultsElement = document.getElementById('results');
+            resultsElement.textContent = 'Sending POST request...';
+            
+            try {
+                const response = await fetch('http://localhost:44300/api/userdata', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-API-Key': apiKey,
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        FirstName: firstName,
+                        CityName: cityName,
+                        YearOfJoining: yearOfJoining
+                    })
+                });
+                
+                const data = await response.text();
+                resultsElement.textContent = `Status: ${response.status} ${response.statusText}\n\n${data}`;
+            } catch (error) {
+                resultsElement.textContent = `Error: ${error.message}`;
+            }
+        });
+        
+        document.getElementById('getButton').addEventListener('click', async () => {
+            const apiKey = document.getElementById('apiKey').value;
+            const resultsElement = document.getElementById('results');
+            resultsElement.textContent = 'Sending GET request...';
+            
+            try {
+                const response = await fetch('http://localhost:44300/api/userdata', {
+                    method: 'GET',
+                    headers: {
+                        'X-API-Key': apiKey,
+                        'Accept': 'application/json'
+                    }
+                });
+                
+                const data = await response.text();
+                resultsElement.textContent = `Status: ${response.status} ${response.statusText}\n\n${data}`;
+            } catch (error) {
+                resultsElement.textContent = `Error: ${error.message}`;
+            }
+        });
+    </script>
+</body>
+</html>

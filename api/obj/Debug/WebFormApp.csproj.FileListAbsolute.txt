@@ -1,0 +1,10 @@
+C:\sairam vemu\WebFormApp\api\bin\WebFormApp.dll.config
+C:\sairam vemu\WebFormApp\api\bin\WebFormApp.dll
+C:\sairam vemu\WebFormApp\api\bin\WebFormApp.pdb
+C:\sairam vemu\WebFormApp\api\bin\Newtonsoft.Json.dll
+C:\sairam vemu\WebFormApp\api\bin\Newtonsoft.Json.xml
+C:\sairam vemu\WebFormApp\api\obj\Debug\WebFormApp.csproj.AssemblyReference.cache
+C:\sairam vemu\WebFormApp\api\obj\Debug\WebFormApp.csproj.CoreCompileInputs.cache
+C:\sairam vemu\WebFormApp\api\obj\Debug\WebFormApp.csproj.Up2Date
+C:\sairam vemu\WebFormApp\api\obj\Debug\WebFormApp.dll
+C:\sairam vemu\WebFormApp\api\obj\Debug\WebFormApp.pdb
